@@ -1,0 +1,30 @@
+﻿
+<div class="input-group">
+    <input type="text"
+           class="form-control"
+           placeholder="Type inventory name here to search"
+           @bind-value="inventoryNameToSearch" />
+    <button type="button"
+            class="btn-success input-group-text"
+            @onclick="OnSearch">
+        Search
+    </button>
+</div>
+
+@*onewaybinding here
+còn 2waybinding là biến ở @code và @bind-value*@
+@inventoryNameToSearch
+
+@code {
+    private string inventoryNameToSearch = string.Empty;
+
+    [Parameter] //exposed something? as from control
+    public EventCallback<string> OnSearchInventory { get; set; } //đây là 1 func callback
+
+    private void OnSearch()
+    {
+        OnSearchInventory.InvokeAsync(inventoryNameToSearch);
+    }
+
+
+}
